@@ -86,6 +86,22 @@ public class AsyncHttpClientUtil {
         return result;
     }
 
+    @Nullable
+    public static String optString(@Nullable final Response response) {
+        if (null == response) {
+            return null;
+        }
+
+        if (response.hasResponseBody()) {
+            try {
+                return response.getResponseBody();
+            } catch (IOException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 
     @Nullable
     public static String toString(@Nullable final Response response) {
@@ -94,7 +110,11 @@ public class AsyncHttpClientUtil {
         }
 
         try {
-            return response.getResponseBody();
+            if (response.hasResponseBody()) {
+                return response.getResponseBody();
+            } else {
+                return null;
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -110,7 +130,15 @@ public class AsyncHttpClientUtil {
         Preconditions.checkNotNull(gson, "gson");
         Preconditions.checkNotNull(clazz, "clazz");
 
-        return ((response) -> JsonUtils.fromJson(gson, AsyncHttpClientUtil.toString(response), clazz));
+        return ((response) -> {
+            HttpStatus status = HttpStatus.valueOf(response.getStatusCode());
+
+            if (status.is2xxSuccessful()) {
+                return JsonUtils.fromJson(gson, AsyncHttpClientUtil.toString(response), clazz);
+            } else {
+                throw new HttpRequestException("Request failed: " + AsyncHttpClientUtil.optString(response), status);
+            }
+        });
     }
 
     @Nonnull

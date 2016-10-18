@@ -30,7 +30,7 @@ public class FeedbackUrlFactory implements UrlFactory {
     @Nonnull
     @Override
     public URL create() {
-        return fullDomainNameWithSlug.toUrl();
+        return UrlUtils.getUrl(fullDomainNameWithSlug.toUrl(), versionUri);
     }
 
     @Nonnull

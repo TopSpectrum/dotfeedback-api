@@ -3,10 +3,11 @@ package feedback.web.api;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -28,8 +29,14 @@ public class JsonUtils {
             return null;
         }
 
+        if (LOGGER.isTraceEnabled()) {
+            LOGGER.trace("Creating {} from '{}'", clazz, string);
+        }
+
         return gson.fromJson(string, clazz);
     }
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonUtils.class);
 
     @Nonnull
     public static String toJson(@Nonnull final Gson gson, @Nullable final Object payload) {
