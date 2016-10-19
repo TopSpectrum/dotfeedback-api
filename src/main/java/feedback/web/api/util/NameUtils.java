@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 
 /**
  * {discussion here}
@@ -47,12 +46,12 @@ public class NameUtils {
         return normalizeName(named.getFirstName());
     }
 
-    @NotNull
+    @Nonnull
     public static String getFirstName(@Nullable final String displayName) {
         return StringUtils.defaultString(parse(displayName).getFirstName(), "Guest");
     }
 
-    @NotNull
+    @Nonnull
     public static String getLastName(@Nullable final String displayName) {
         return StringUtils.defaultString(parse(displayName).getLastName());
     }
@@ -239,8 +238,8 @@ public class NameUtils {
         return null;
     }
 
-    @NotNull
-    public static String getFirstName(@Nullable final Named user, @NotNull final String defaultFirstName) {
+    @Nonnull
+    public static String getFirstName(@Nullable final Named user, @Nonnull final String defaultFirstName) {
         final String firstName = optFirstName(user);
 
         return StringUtils.defaultIfBlank(firstName, defaultFirstName);
@@ -289,7 +288,7 @@ public class NameUtils {
         return isNamed(named.getDisplayName()) || isNamed(named.getFirstName()) || isNamed(named.getLastName());
     }
 
-    @NotNull
+    @Nonnull
     public static Named parse(@Nullable final String authorName) {
         if (StringUtils.isBlank(authorName)) {
             return new InlineNamed(null, null, null);

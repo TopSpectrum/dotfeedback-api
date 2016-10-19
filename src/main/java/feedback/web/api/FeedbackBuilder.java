@@ -1,14 +1,12 @@
-package feedback.web.api.model;
+package feedback.web.api;
 
 import com.zipwhip.concurrent.ObservableFuture;
-import feedback.web.api.FeedbackClient;
-import feedback.web.api.FeedbackClientBuilder;
+import feedback.web.api.model.Author;
 import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.util.UrlUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.net.URL;
 
 /**
@@ -86,12 +84,12 @@ public class FeedbackBuilder {
     }
 
     @Nonnull
-    public ReviewFeedbackBuilder importedFrom(@NotNull final String url) {
+    public ReviewFeedbackBuilder importedFrom(@Nonnull final String url) {
         return importedFrom(UrlUtils.getUrl(url));
     }
 
     @Nonnull
-    public ReviewFeedbackBuilder importedFrom(@NotNull final URL url) {
+    public ReviewFeedbackBuilder importedFrom(@Nonnull final URL url) {
         return review().importedFrom(url);
     }
 

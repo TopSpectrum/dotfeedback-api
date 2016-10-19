@@ -10,8 +10,6 @@ import com.zipwhip.lifecycle.CascadingDestroyableBase;
 import com.zipwhip.lifecycle.DestroyableBase;
 import feedback.web.api.executors.ExecutorType;
 import feedback.web.api.executors.ObservableExecutorAdapter;
-import feedback.web.api.model.ReviewFeedbackBuilder;
-import feedback.web.api.model.ReviewResponse;
 import feedback.web.api.model.Website;
 import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.model.Review;

@@ -1,16 +1,18 @@
-package feedback.web.api.model;
+package feedback.web.api;
 
 import com.zipwhip.concurrent.ObservableFuture;
-import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.model.Author;
+import feedback.web.api.model.Identity;
+import feedback.web.api.model.Review;
 import feedback.web.api.names.Name;
-import feedback.web.api.util.NameUtils;
 import feedback.web.api.names.Named;
 import feedback.web.api.util.ConversionUtils;
 import feedback.web.api.util.IdentityUtils;
+import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.util.NameUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -21,7 +23,7 @@ import java.util.function.Consumer;
  */
 public class AuthorFeedbackBuilder {
 
-    @NotNull
+    @Nonnull
     private ReviewFeedbackBuilder parent;
 
     private Author template = new Author();
@@ -99,7 +101,7 @@ public class AuthorFeedbackBuilder {
     }
 
     @Nonnull
-    public <T> AuthorFeedbackBuilder withAddition(@NotNull final BiConsumer<Author, T> addition, @Nullable final T value) {
+    public <T> AuthorFeedbackBuilder withAddition(@Nonnull final BiConsumer<Author, T> addition, @Nullable final T value) {
         addition.accept(template, value);
 
         return this;

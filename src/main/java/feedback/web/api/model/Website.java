@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.net.URL;
 
@@ -43,7 +42,7 @@ public class Website implements Serializable {
     @Nullable
     private final String slug;
 
-    @NotNull
+    @Nonnull
     private final String fullDomainNameWithSlug;
 
     private final boolean valid;
@@ -143,7 +142,7 @@ public class Website implements Serializable {
         return website.getFullDomainNameWithSlug();
     }
 
-    @NotNull
+    @Nonnull
     public String getFullDomainNameWithSlug() {
         return fullDomainNameWithSlug;
     }
@@ -152,7 +151,7 @@ public class Website implements Serializable {
         return StringUtils.isNotBlank(slug);
     }
 
-    @NotNull
+    @Nonnull
     public Website toParent() {
         if (!hasParent()) {
             return this;
@@ -165,17 +164,17 @@ public class Website implements Serializable {
         return hasSlug();
     }
 
-    @NotNull
+    @Nonnull
     public URL toUrl() {
         return UrlUtils.getUrl("http://www." + getFullDomainName());
     }
 
-    @NotNull
+    @Nonnull
     public URL toURL() {
         return toURL("http");
     }
 
-    @NotNull
+    @Nonnull
     public URL toURL(@Nullable String protocol) {
         protocol = org.apache.commons.lang3.StringUtils.defaultIfBlank(protocol, "http");
 

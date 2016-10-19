@@ -7,14 +7,13 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.AsyncHttpProvider;
 import feedback.web.api.model.Website;
-import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.util.AsyncHttpClientUtils;
 import feedback.web.api.util.DestroyableUtils;
+import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.util.UrlUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URL;
 
@@ -68,7 +67,7 @@ public class FeedbackClientBuilder {
     }
 
     @Nonnull
-    public FeedbackClientBuilder withAsyncHttpClient(@NotNull final AsyncHttpClientConfig config) {
+    public FeedbackClientBuilder withAsyncHttpClient(@Nonnull final AsyncHttpClientConfig config) {
         this.config = config;
 
         return this;

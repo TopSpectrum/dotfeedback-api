@@ -7,7 +7,6 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -198,7 +197,7 @@ public class ConversionUtils {
     }
 
     @Nullable
-    public static <T, R> R optValue(@Nullable final T object, @NotNull final Function<T, R> reaper) {
+    public static <T, R> R optValue(@Nullable final T object, @Nonnull final Function<T, R> reaper) {
         if (null == object) {
             return null;
         }

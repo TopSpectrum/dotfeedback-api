@@ -1,10 +1,7 @@
 import com.google.gson.GsonBuilder;
 import com.ning.http.client.AsyncHttpClient;
 import com.zipwhip.concurrent.ObservableFuture;
-import feedback.web.api.ApiKeyAuthorizer;
-import feedback.web.api.DefaultFeedbackClient;
-import feedback.web.api.FeedbackClient;
-import feedback.web.api.FeedbackClientConfiguration;
+import feedback.web.api.*;
 import feedback.web.api.executors.DefaultExecutorFactory;
 import feedback.web.api.model.*;
 import feedback.web.api.names.Named;

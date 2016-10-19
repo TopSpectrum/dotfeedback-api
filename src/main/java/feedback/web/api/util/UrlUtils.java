@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -20,7 +19,7 @@ import java.net.URL;
 public class UrlUtils {
 
     @Nonnull
-    public static String getFullDomainName(@NotNull final String customerDomainName, @NotNull final String topLevelDomainName) {
+    public static String getFullDomainName(@Nonnull final String customerDomainName, @Nonnull final String topLevelDomainName) {
         String c = MorePreconditions.checkNotBlank(StringUtils.trimToNull(customerDomainName), "customerDomainName");
         String t = MorePreconditions.checkNotBlank(StringUtils.trimToNull(topLevelDomainName), "topLevelDomainName");
         String fullDomainName = c + "." + t;
@@ -33,7 +32,7 @@ public class UrlUtils {
     }
 
     @Nonnull
-    public static String getFullDomainNameWithSlug(@NotNull final String fullDomainName, @Nullable final String slug) {
+    public static String getFullDomainNameWithSlug(@Nonnull final String fullDomainName, @Nullable final String slug) {
         MorePreconditions.checkNotBlank(fullDomainName, "fullDomainName");
 
         if (StringUtils.isBlank(slug)) {
@@ -44,12 +43,12 @@ public class UrlUtils {
     }
 
     @Nonnull
-    public static String getFullDomainNameWithSlug(@NotNull final String customerDomainName, @NotNull final String topLevelDomainName, @Nullable final String slug) {
+    public static String getFullDomainNameWithSlug(@Nonnull final String customerDomainName, @Nonnull final String topLevelDomainName, @Nullable final String slug) {
         return getFullDomainNameWithSlug(getFullDomainName(customerDomainName, topLevelDomainName), slug);
     }
 
-    @NotNull
-    public static Website parseFullDomainNameWithSlug(@NotNull final String url) {
+    @Nonnull
+    public static Website parseFullDomainNameWithSlug(@Nonnull final String url) {
         MorePreconditions.checkNotBlank(url, "url");
 
         if (StringUtils.contains(url, ":/")) {
@@ -61,8 +60,8 @@ public class UrlUtils {
         }
     }
 
-    @NotNull
-    public static Website parseFullDomainNameWithSlug(@NotNull final URL url) {
+    @Nonnull
+    public static Website parseFullDomainNameWithSlug(@Nonnull final URL url) {
         MorePreconditions.checkNotBlank(url);
 
         String hostName = url.getHost();
@@ -208,7 +207,7 @@ public class UrlUtils {
         }
     }
 
-    @NotNull
+    @Nonnull
     private static String nukeDots(@Nullable final String string) {
         if (org.apache.commons.lang3.StringUtils.contains(string, ".")) {
             return "";

@@ -1,14 +1,13 @@
-package feedback.web.api.model;
+package feedback.web.api;
 
 import com.zipwhip.concurrent.ObservableFuture;
-import feedback.web.api.FeedbackClient;
-import feedback.web.api.FeedbackClientBuilder;
-import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.model.Author;
+import feedback.web.api.model.Review;
 import feedback.web.api.util.ConversionUtils;
+import feedback.web.api.util.MorePreconditions;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.net.URL;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -109,7 +108,7 @@ public class ReviewFeedbackBuilder {
     }
 
     @Nonnull
-    public <T> ReviewFeedbackBuilder withAddition(@NotNull final BiConsumer<Review, T> addition, @Nullable final T value) {
+    public <T> ReviewFeedbackBuilder withAddition(@Nonnull final BiConsumer<Review, T> addition, @Nullable final T value) {
         addition.accept(template, value);
 
         return this;
