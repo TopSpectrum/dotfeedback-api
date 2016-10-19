@@ -53,6 +53,8 @@ public class UrlUtils {
 
         if (StringUtils.contains(url, ":/")) {
             return parseFullDomainNameWithSlug(getUrl(url));
+        } else if (StringUtils.startsWith(url, "//")){
+            return parseFullDomainNameWithSlug(getUrl("http:" + url));
         } else {
             return parseFullDomainNameWithSlug(getUrl("http://" + url));
         }

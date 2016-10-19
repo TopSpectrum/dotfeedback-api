@@ -65,7 +65,7 @@ public class DefaultFeedbackClient extends CascadingDestroyableBase implements F
 
     @Nonnull
     @Override
-    public ObservableFuture<ReviewResponse> review(@Nonnull final Review review) {
+    public ObservableFuture<ReviewResponse> createReview(@Nonnull final Review review) {
         final AsyncHttpClient.BoundRequestBuilder builder = preparePost(review.getFullDomainNameWithSlug(), "/reviews");
 
         {
@@ -77,10 +77,10 @@ public class DefaultFeedbackClient extends CascadingDestroyableBase implements F
 
     @Nonnull
     @Override
-    public ObservableFuture<ReviewResponse> review(@Nonnull final ReviewFeedbackBuilder builder) {
+    public ObservableFuture<ReviewResponse> createReview(@Nonnull final ReviewFeedbackBuilder builder) {
         MorePreconditions.checkNotNull(builder, "builder");
 
-        return review(builder.toReview());
+        return createReview(builder.toReview());
     }
 
     @Nonnull

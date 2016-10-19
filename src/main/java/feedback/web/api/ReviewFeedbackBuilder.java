@@ -66,7 +66,7 @@ public class ReviewFeedbackBuilder {
     public ObservableFuture<ReviewResponse> send(@Nonnull final FeedbackClient client) {
         MorePreconditions.checkNotNull(client, "client is null, cannot send yet.");
 
-        return client.review(this);
+        return client.createReview(this);
     }
 
     @Nonnull

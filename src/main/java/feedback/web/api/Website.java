@@ -3,6 +3,7 @@ package feedback.web.api;
 import com.google.common.base.Objects;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -197,6 +198,11 @@ public class Website implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hashCode(getFullDomainNameWithSlug());
+    }
+
+    @Nonnull
+    public static Website parse(String fullDomainNameWithSlugOrUrl) {
+        return UrlUtils.parseFullDomainNameWithSlug(fullDomainNameWithSlugOrUrl);
     }
     //endregion
 

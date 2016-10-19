@@ -11,10 +11,10 @@ import javax.annotation.Nonnull;
 public interface FeedbackClient {
 
     @Nonnull
-    ObservableFuture<ReviewResponse> review(@Nonnull final Review review);
+    ObservableFuture<ReviewResponse> createReview(@Nonnull final Review review);
 
     @Nonnull
-    ObservableFuture<ReviewResponse> review(@Nonnull final ReviewFeedbackBuilder review);
+    ObservableFuture<ReviewResponse> createReview(@Nonnull final ReviewFeedbackBuilder review);
 
 
 }

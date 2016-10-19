@@ -1,3 +1,5 @@
+import com.google.gson.GsonBuilder;
+import com.ning.http.client.AsyncHttpClient;
 import com.zipwhip.concurrent.ObservableFuture;
 import feedback.web.api.*;
 import org.junit.Test;
@@ -5,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -27,10 +30,53 @@ public class FeedbackClientTest {
         LOGGER.debug("Our feedback is available at {}", review.getReviewUrl());
     }
 
+    @Test
+    public void nameSetupClient() throws Exception {
+
+        final FeedbackClient client;
+
+        {
+            FeedbackClientConfiguration configuration = new FeedbackClientConfiguration();
+
+            // for reviews that do not specify a special website.
+            configuration.setDefaultWebsite(Website.parse("michael.feedback"));
+
+            // set the version of the API (defaults to current version: 1)
+            configuration.setVersionUri(UrlUtils.getUri("/api/v1")); // default value.
+            configuration.setVersionKey("1"); // alias for above.
+
+            // Set your ApiKey here.
+            configuration.setAuthorizer(new ApiKeyAuthorizer("074ee555-56d4-4051-a814-707f0736c086"));
+
+            configuration.setCharset(Charset.forName("UTF-8")); // default value.
+
+            int threadsPerWorker = 10; // default value.
+            int threadsPerEvents = 1; // default value.
+            configuration.setExecutorFactory(new DefaultExecutorFactory(threadsPerWorker, threadsPerEvents)); //default value.
+            configuration.setGson(new GsonBuilder().create()); // default value.
+
+            AsyncHttpClient asyncHttpClient = new AsyncHttpClient(); // default value.
+
+            client = new DefaultFeedbackClient(configuration, asyncHttpClient);
+        }
+
+        final Review review = new Review();
+
+        {
+            review.setContent("I like pickles.");
+
+            // optional (10 -> 5 stars)
+            review.setRating(10);
+        }
+
+        final ObservableFuture<ReviewResponse> future = client.createReview(review);
+
+        final ReviewResponse response = future.get();
+
+    }
 
     @Test
     public void name() throws Exception {
-
         FeedbackBuilder feedback = new FeedbackBuilder()
                 .withApiKey("074ee555-56d4-4051-a814-707f0736c086")
                 .forWebsite("default.feedback");
