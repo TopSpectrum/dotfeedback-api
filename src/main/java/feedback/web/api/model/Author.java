@@ -3,7 +3,7 @@ package feedback.web.api.model;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import feedback.web.api.util.ConversionUtils;
-import feedback.web.api.util.NameUtil;
+import feedback.web.api.util.NameUtils;
 import feedback.web.api.names.Named;
 
 import javax.annotation.Nullable;
@@ -158,7 +158,7 @@ public class Author implements Serializable {
     public void setNamed(@Nullable final Named named, @Nullable final String location) {
         setNamed(named);
         setLocation(location);
-        setDisplayName(NameUtil.getFirstNameLastInitialWithLocation(named, location));
+        setDisplayName(NameUtils.getFirstNameLastInitialWithLocation(named, location));
     }
     public void setNamed(@Nullable final Named named) {
         this.setDisplayName(ConversionUtils.optValue(named, Named::getDisplayName));

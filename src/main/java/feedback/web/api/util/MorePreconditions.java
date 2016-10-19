@@ -229,7 +229,7 @@ public final class MorePreconditions {
         } else if (parameters instanceof URL) {
             return UrlUtils.isNotBlank((URL) parameters);
         } else if (parameters instanceof Identity) {
-            return IdentityUtil.isNotBlank((Identity) parameters);
+            return IdentityUtils.isNotBlank((Identity) parameters);
         } else if (parameters instanceof Map) {
             return !MapUtils.isEmpty((Map) parameters);
         } else if (parameters instanceof Number) {
@@ -299,7 +299,7 @@ public final class MorePreconditions {
     @Nonnull
     public static String checkValidEmail(@Nullable final String identity) {
         checkNotBlank(identity);
-        checkState(IdentityUtil.isValidEmail(identity));
+        checkState(IdentityUtils.isValidEmail(identity));
 
         return identity;
     }

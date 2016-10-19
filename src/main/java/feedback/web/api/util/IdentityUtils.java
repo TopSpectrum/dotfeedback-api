@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * @author msmyers
  * @since 10/17/16
  */
-public class IdentityUtil {
+public class IdentityUtils {
 
     private static final Pattern REPLACE_CAPITALS = Pattern.compile("([A-Z])");
     private static final Pattern EMAIL_PATTERN = Pattern.compile("(?:\\w)+(?:\\w|-|\\.|\\+)*@(?:\\w)+(?:\\w|\\.|-)*\\.(?:\\w|\\.|-)+$");
@@ -27,7 +27,7 @@ public class IdentityUtil {
 
     @Nonnull
     public static Identity email(@Nonnull final String email) {
-        return new Identity("email", MorePreconditions.checkArgument(email, IdentityUtil.isValidEmail(email), "not valid email: " + email));
+        return new Identity("email", MorePreconditions.checkArgument(email, IdentityUtils.isValidEmail(email), "not valid email: " + email));
     }
 
     public static boolean isNotBlank(@Nullable final Identity identity) {

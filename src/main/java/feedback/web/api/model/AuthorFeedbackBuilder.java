@@ -3,10 +3,10 @@ package feedback.web.api.model;
 import com.zipwhip.concurrent.ObservableFuture;
 import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.names.Name;
-import feedback.web.api.util.NameUtil;
+import feedback.web.api.util.NameUtils;
 import feedback.web.api.names.Named;
 import feedback.web.api.util.ConversionUtils;
-import feedback.web.api.util.IdentityUtil;
+import feedback.web.api.util.IdentityUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -64,7 +64,7 @@ public class AuthorFeedbackBuilder {
 
     @Nonnull
     public AuthorFeedbackBuilder named(@Nullable final Name named) {
-        return named(NameUtil.optNamed(named));
+        return named(NameUtils.optNamed(named));
     }
 
     @Nonnull
@@ -141,6 +141,6 @@ public class AuthorFeedbackBuilder {
     }
 
     public AuthorFeedbackBuilder identifiedBy(String identity) {
-        return identifiedBy(IdentityUtil.toIdentity(identity));
+        return identifiedBy(IdentityUtils.toIdentity(identity));
     }
 }

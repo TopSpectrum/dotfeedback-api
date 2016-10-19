@@ -8,7 +8,7 @@ import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.AsyncHttpProvider;
 import feedback.web.api.model.Website;
 import feedback.web.api.util.MorePreconditions;
-import feedback.web.api.util.AsyncHttpClientUtil;
+import feedback.web.api.util.AsyncHttpClientUtils;
 import feedback.web.api.util.DestroyableUtils;
 import feedback.web.api.util.UrlUtils;
 
@@ -141,7 +141,7 @@ public class FeedbackClientBuilder {
         final Closer closer = Closer.create();
 
         if (null == this.asyncHttpClient) {
-            asyncHttpClient = closer.register(AsyncHttpClientUtil.newInstance(config, provider));
+            asyncHttpClient = closer.register(AsyncHttpClientUtils.newInstance(config, provider));
         } else {
             asyncHttpClient = this.asyncHttpClient;
         }

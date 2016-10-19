@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
  * @version 1.0.0
  * @since 5/20/15
  */
-public class NameUtil {
+public class NameUtils {
 
     @Nullable
     public static String parseFirstName(@Nullable final String displayName) {

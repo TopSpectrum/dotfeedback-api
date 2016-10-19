@@ -15,7 +15,7 @@ import feedback.web.api.model.ReviewResponse;
 import feedback.web.api.model.Website;
 import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.model.Review;
-import feedback.web.api.util.AsyncHttpClientUtil;
+import feedback.web.api.util.AsyncHttpClientUtils;
 import feedback.web.api.util.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -125,7 +125,7 @@ public class DefaultFeedbackClient extends CascadingDestroyableBase implements F
 //        AsyncHttpClient client = new AsyncHttpClient();
 //        client.post(context,uri, entity, "application/json", myAsyncHttpResponseHandler);`
 
-        AsyncHttpClientUtil.setPostBody(
+        AsyncHttpClientUtils.setPostBody(
                 configuration.getGson(),
                 builder,
                 bodyPart);
@@ -133,14 +133,14 @@ public class DefaultFeedbackClient extends CascadingDestroyableBase implements F
 
     @Nonnull
     protected <T> ObservableFuture<T> execute(@Nonnull final AsyncHttpClient.BoundRequestBuilder builder, @Nonnull Class<T> clazz) {
-        return execute(builder, AsyncHttpClientUtil.toJsonConverter(configuration.getGson(), clazz));
+        return execute(builder, AsyncHttpClientUtils.toJsonConverter(configuration.getGson(), clazz));
     }
 
     @Nonnull
     protected  <T> ObservableFuture<T> execute(@Nonnull final AsyncHttpClient.BoundRequestBuilder builder, @Nonnull Function<Response, T> converter) {
         final MutableObservableFuture<T> result = future();
 
-        builder.execute(new AsyncHttpClientUtil.SimpleCompletionHandler<>(result, converter));
+        builder.execute(new AsyncHttpClientUtils.SimpleCompletionHandler<>(result, converter));
 
         return result;
     }

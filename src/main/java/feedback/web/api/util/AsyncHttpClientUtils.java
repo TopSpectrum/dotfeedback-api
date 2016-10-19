@@ -25,7 +25,7 @@ import java.util.function.Function;
  * @author msmyers
  * @since 5/17/16
  */
-public class AsyncHttpClientUtil {
+public class AsyncHttpClientUtils {
 
     @Nonnull
     public static ObservableFuture<String> optString(@Nonnull final AsyncHttpClient client, @Nullable final URI url) {
@@ -56,7 +56,7 @@ public class AsyncHttpClientUtil {
 
     @SuppressWarnings({"null", "ConstantConditions"})
     public static <T> ObservableFuture<T> optFromJson(@Nonnull final Gson gson, @Nonnull final AsyncHttpClient client, @Nullable final URL url, @Nonnull final Class<T> clazz) {
-        return opt(client, url, (response -> JsonUtils.fromJson(gson, AsyncHttpClientUtil.toString(response), clazz)));
+        return opt(client, url, (response -> JsonUtils.fromJson(gson, AsyncHttpClientUtils.toString(response), clazz)));
     }
 
     @Nonnull
@@ -70,7 +70,7 @@ public class AsyncHttpClientUtil {
 
     @Nonnull
     public static ObservableFuture<String> optString(@Nonnull final AsyncHttpClient client, @Nullable final String url) {
-        return adapt(execute(client, url), AsyncHttpClientUtil::toString);
+        return adapt(execute(client, url), AsyncHttpClientUtils::toString);
     }
 
     @Nonnull
@@ -136,9 +136,9 @@ public class AsyncHttpClientUtil {
             HttpStatus status = HttpStatus.valueOf(response.getStatusCode());
 
             if (status.is2xxSuccessful()) {
-                return JsonUtils.fromJson(gson, AsyncHttpClientUtil.toString(response), clazz);
+                return JsonUtils.fromJson(gson, AsyncHttpClientUtils.toString(response), clazz);
             } else {
-                throw new HttpRequestException("Request failed: " + AsyncHttpClientUtil.optString(response), status);
+                throw new HttpRequestException("Request failed: " + AsyncHttpClientUtils.optString(response), status);
             }
         });
     }
@@ -185,15 +185,15 @@ public class AsyncHttpClientUtil {
     }
 
     protected static <T> MutableObservableFuture<T> failWithNull() {
-        return new FakeFailingObservableFuture<>(AsyncHttpClientUtil.class, new IllegalStateException("null"));
+        return new FakeFailingObservableFuture<>(AsyncHttpClientUtils.class, new IllegalStateException("null"));
     }
 
     protected static <T> MutableObservableFuture<T> fail(Throwable t) {
-        return new FakeFailingObservableFuture<>(AsyncHttpClientUtil.class, t);
+        return new FakeFailingObservableFuture<>(AsyncHttpClientUtils.class, t);
     }
 
     protected static <T> MutableObservableFuture<T> future() {
-        return new DefaultObservableFuture<>(AsyncHttpClientUtil.class);
+        return new DefaultObservableFuture<>(AsyncHttpClientUtils.class);
     }
 
     public static void addQueryParam(@Nonnull final AsyncHttpClient.BoundRequestBuilder builder, @Nullable final Map<String, Object> request) {

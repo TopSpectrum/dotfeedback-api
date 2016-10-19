@@ -8,8 +8,8 @@ import feedback.web.api.FeedbackClientConfiguration;
 import feedback.web.api.executors.DefaultExecutorFactory;
 import feedback.web.api.model.*;
 import feedback.web.api.names.Named;
-import feedback.web.api.util.IdentityUtil;
-import feedback.web.api.util.NameUtil;
+import feedback.web.api.util.IdentityUtils;
+import feedback.web.api.util.NameUtils;
 import feedback.web.api.util.UrlUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -48,17 +48,17 @@ public class FeedbackClientTest {
             // identity is optional.
             {
                 // helpers
-                author.setIdentity(IdentityUtil.email("michael@smyers.net"));
-                author.setIdentity(IdentityUtil.username("michaelsmyers"));
+                author.setIdentity(IdentityUtils.email("michael@smyers.net"));
+                author.setIdentity(IdentityUtils.username("michaelsmyers"));
 
                 // autodetects
-                author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net")); // ( email )
-                author.setIdentity(IdentityUtil.toIdentity("michaelsmyers")); // ( username )
+                author.setIdentity(IdentityUtils.toIdentity("michael@smyers.net")); // ( email )
+                author.setIdentity(IdentityUtils.toIdentity("michaelsmyers")); // ( username )
 
                 // uri
-                author.setIdentity(IdentityUtil.toIdentity("email:/michaelsmyers"));
-                author.setIdentity(IdentityUtil.toIdentity("username:/michaelsmyers"));
-                author.setIdentity(IdentityUtil.toIdentity("facebook:/michael.smyers"));
+                author.setIdentity(IdentityUtils.toIdentity("email:/michaelsmyers"));
+                author.setIdentity(IdentityUtils.toIdentity("username:/michaelsmyers"));
+                author.setIdentity(IdentityUtils.toIdentity("facebook:/michael.smyers"));
 
                 // DO.IT.LIVE.
                 author.setIdentity(new Identity("email", "michael@smyers.net"));
@@ -79,7 +79,7 @@ public class FeedbackClientTest {
 
                 // or you could use fancy tools
                 // the name parser handles a bunch of cool stuff like 'Michael Smyers Jr. III'
-                Named named = NameUtil.parse("Michael Smyers");
+                Named named = NameUtils.parse("Michael Smyers");
                 String location = "Seattle";
 
                 {
@@ -98,7 +98,7 @@ public class FeedbackClientTest {
                     // setNamed(@Nullable named, @Nullable location) internally calls:
                     author.setNamed(named);
                     author.setLocation(location);
-                    author.setDisplayName(NameUtil.getFirstNameLastInitialWithLocation(named, location));
+                    author.setDisplayName(NameUtils.getFirstNameLastInitialWithLocation(named, location));
                 }
             }
         }
@@ -198,7 +198,7 @@ public class FeedbackClientTest {
         Author author = new Author();
 
         {
-            author.setIdentity(IdentityUtil.email("new_user" + (UUID.randomUUID().toString()) + "@gmail.com"));
+            author.setIdentity(IdentityUtils.email("new_user" + (UUID.randomUUID().toString()) + "@gmail.com"));
             author.setDisplayName("displayName");
             author.setFirstName("firstName");
             author.setLastName("lastName");
