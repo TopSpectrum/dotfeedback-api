@@ -4,9 +4,9 @@ A java library to send feedback from yourself, or import from your site.
 
 ---
 
-####Here is how to use it.
+### Here is how to use it.
 
-##### Give your own feedback
+#### Give your own feedback
 
 ```java
 ReviewResponse review = new FeedbackBuilder()
@@ -16,7 +16,7 @@ ReviewResponse review = new FeedbackBuilder()
     .get(30, TimeUnit.SECONDS);
 ```
 
-##### Import feedback from your website
+#### Import feedback from your website
     
 ```java
 FeedbackBuilder feedback = new FeedbackBuilder()
@@ -29,7 +29,9 @@ ReviewFeedbackBuilder review = feedback.importedFrom(UrlUtils.getUrl("http://www
 
 AuthorFeedbackBuilder author = review.writtenBy("Michael Smyers")
         .identifiedBy("michael@smyers.net")
-        .havingProfile(UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666"), UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666/picture.png"))
+        .havingProfile(
+                "http://www.MyConsumerSite.com/user/666", 
+                "http://www.MyConsumerSite.com/user/666/picture.png")
         .locatedIn("Seattle");
 
 ObservableFuture<ReviewResponse> future = author.send();
@@ -38,4 +40,5 @@ ReviewResponse response = future.get(30, TimeUnit.SECONDS);
 
 URL postedTo = response.getReviewUrl();
 ```
+
 
