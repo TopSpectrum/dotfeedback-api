@@ -19,6 +19,12 @@ public class IdentityUtil {
     private static final Pattern EMAIL_PATTERN = Pattern.compile("(?:\\w)+(?:\\w|-|\\.|\\+)*@(?:\\w)+(?:\\w|\\.|-)*\\.(?:\\w|\\.|-)+$");
     private static final Pattern EMAIL_NAME_VALUE_PATTERN = Pattern.compile("(.*)<(.*)>");
 
+    @Nonnull
+    public static Identity username(String username) {
+        return new Identity("username", MorePreconditions.checkArgument(username, StringUtils.isNotBlank(username), "not valid username: " + username));
+    }
+
+    @Nonnull
     public static Identity email(@Nonnull final String email) {
         return new Identity("email", MorePreconditions.checkArgument(email, IdentityUtil.isValidEmail(email), "not valid email: " + email));
     }
@@ -107,4 +113,27 @@ public class IdentityUtil {
 
         return matcher.matches();
     }
+
+    @Nonnull
+    public static Identity toIdentity(@Nonnull final String identity) {
+        MorePreconditions.checkNotBlank(identity);
+
+        if (StringUtils.contains(identity, ":/")) {
+            final String providerId = MorePreconditions.checkNotBlank(StringUtils.trimToNull(StringUtils.substringBefore(identity, ":/")));
+            final String providerUserId = MorePreconditions.checkNotBlank(StringUtils.trimToNull(StringUtils.substringAfter(identity, ":/")));
+
+            MorePreconditions.checkState(!StringUtils.contains(providerId, ":/"), "Contains invalid characters.");
+            MorePreconditions.checkState(!StringUtils.contains(providerUserId, ":/"), "Contains invalid characters.");
+
+            return new Identity(providerId, providerUserId);
+        }
+
+        if (1 == StringUtils.countMatches(identity, "@")) {
+            return email(MorePreconditions.checkValidEmail(identity));
+        } else {
+            return username(identity);
+        }
+    }
+
+
 }

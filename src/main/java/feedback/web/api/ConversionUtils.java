@@ -28,6 +28,42 @@ public class ConversionUtils {
 
     public static final int BUFFER_SIZE = 4096;
 
+    public static boolean bothNull(@Nullable final Object object1, @Nullable final Object object2) {
+        return null == object1 && null == object2;
+    }
+
+    public static boolean onlyOneNull(@Nullable final Object object1, @Nullable final Object object2) {
+        return !bothNull(object1, object2) && (null == object1 || null == object2);
+    }
+
+    public static boolean isNoneNull(@Nullable final Object... objects) {
+        if (null == objects) {
+            return false;
+        }
+
+        for (Object object : objects) {
+            if (null == object) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean isAllNull(@Nullable final Object... objects) {
+        if (null == objects) {
+            return true;
+        }
+
+        for (Object object : objects) {
+            if (null != object) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Nullable
     public static String toString(@Nullable Object object) {
         if (null == object) {

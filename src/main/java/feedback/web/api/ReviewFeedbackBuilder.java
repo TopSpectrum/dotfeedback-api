@@ -24,6 +24,9 @@ public class ReviewFeedbackBuilder {
     @Nullable
     private FeedbackClientBuilder feedbackClientBuilder;
 
+    @Nullable
+    private AuthorFeedbackBuilder authorFeedbackBuilder;
+
     private Review template = new Review();
 
     //region constructors()
@@ -67,25 +70,38 @@ public class ReviewFeedbackBuilder {
     }
 
     @Nonnull
+    public ReviewFeedbackBuilder importedFrom(@Nonnull final URL importedSourceUrl, @Nullable final Author author) {
+        return importedFrom(importedSourceUrl).writtenBy(author);
+    }
+
+    @Nonnull
     public ReviewFeedbackBuilder importedFrom(@Nonnull final URL importedSource, @Nullable final Author author, @Nonnull final String content) {
-        MorePreconditions.checkNotNull(importedSource, "importedUrl");
-        MorePreconditions.checkNotBlank(content);
+        return importedFrom(importedSource, author).withContent(MorePreconditions.checkNotBlank(content, "content"));
+    }
 
-        fromSource(importedSource);
-        withAuthor(author);
-        withContent(content);
+    @Nonnull
+    public ReviewFeedbackBuilder importedFrom(@Nullable final URL importedSourceUrl) {
+        return withAddition(Review::setImportedSource, importedSourceUrl);
+    }
 
+    @Nonnull
+    public ReviewFeedbackBuilder rated(int rating) {
+        template.setRating(rating);
         return this;
     }
 
     @Nonnull
-    public ReviewFeedbackBuilder fromSource(@Nullable final URL importedSource) {
-        return withAddition(Review::setImportedSource, importedSource);
+    public ReviewFeedbackBuilder writtenBy(@Nullable final Author author) {
+        return withAddition(Review::setAuthor, author);
     }
 
     @Nonnull
-    public ReviewFeedbackBuilder withAuthor(@Nullable final Author author) {
-        return withAddition(Review::setAuthor, author);
+    public AuthorFeedbackBuilder writtenBy(@Nullable final String authorName) {
+        if (null == authorFeedbackBuilder) {
+            authorFeedbackBuilder = new AuthorFeedbackBuilder(this);
+        }
+
+        return authorFeedbackBuilder.named(authorName);
     }
 
     @Nonnull
@@ -127,5 +143,4 @@ public class ReviewFeedbackBuilder {
 
         throw new IllegalStateException("I am asked to make a FeedbackClient, but I do not have enough information to do so.");
     }
-
 }

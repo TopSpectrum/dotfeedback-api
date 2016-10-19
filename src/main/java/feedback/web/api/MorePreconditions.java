@@ -294,6 +294,14 @@ public final class MorePreconditions {
         return !expressionForNullOrEmpty(object);
     }
 
+    @Nonnull
+    public static String checkValidEmail(@Nullable final String identity) {
+        checkNotBlank(identity);
+        checkState(IdentityUtil.isValidEmail(identity));
+
+        return identity;
+    }
+
 //    @Nullable
 //    @SuppressWarnings("unchecked")
 //    public static <T> T checkCastable(@Nullable final Object context, @Nonnull Class<T> clazz) {

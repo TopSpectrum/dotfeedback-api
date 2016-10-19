@@ -36,6 +36,27 @@ public class Author implements Serializable {
     @Nullable
     private String firstName;
 
+    public Author() {
+
+    }
+
+    public Author(@Nullable final Author template) {
+        if (null == template) {
+            return;
+        }
+
+        this.setIdentity(template.getIdentity());
+
+        this.setDisplayName(template.getDisplayName());
+        this.setLastName(template.getLastName());
+        this.setFirstName(template.getFirstName());
+
+        this.setLocation(template.getLocation());
+
+        this.setProfileUrl(template.getProfileUrl());
+        this.setImageUrl(template.getImageUrl());
+    }
+
     @Nullable
     public Identity getIdentity() {
         return identity;

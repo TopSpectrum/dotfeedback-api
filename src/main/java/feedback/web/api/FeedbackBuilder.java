@@ -4,6 +4,8 @@ import com.zipwhip.concurrent.ObservableFuture;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
+import java.net.URL;
 
 /**
  * @author msmyers
@@ -79,6 +81,16 @@ public class FeedbackBuilder {
         return this;
     }
 
+    @Nonnull
+    public ReviewFeedbackBuilder importedFrom(@NotNull final String url) {
+        return importedFrom(UrlUtils.getUrl(url));
+    }
+
+    @Nonnull
+    public ReviewFeedbackBuilder importedFrom(@NotNull final URL url) {
+        return review().importedFrom(url);
+    }
+
     //region review
     @Nonnull
     public ObservableFuture<ReviewResponse> sendFeedback(@Nonnull final String content) {
@@ -92,7 +104,7 @@ public class FeedbackBuilder {
     @Nonnull
     public ObservableFuture<ReviewResponse> sendFeedback(@Nonnull Author author, @Nonnull String content) {
         return review()
-                .withAuthor(author)
+                .writtenBy(author)
                 .withContent(content)
                 .send();
     }
