@@ -27,8 +27,8 @@ ReviewFeedbackBuilder review = feedback.importedFrom(UrlUtils.getUrl("http://www
         .rated(10)
         .withContent("I like tomatoes better than pickles.");
 
-AuthorFeedbackBuilder author = review.writtenBy("Michael Smyers")
-        .identifiedBy("michael@smyers.net")
+AuthorFeedbackBuilder author = review.writtenBy("Michael Johnson")
+        .identifiedBy("michael@johnson.net")
         .havingProfile(
                 "http://www.MyConsumerSite.com/user/666", 
                 "http://www.MyConsumerSite.com/user/666/picture.png")
@@ -103,12 +103,12 @@ final Author author = new Author();
     // examples on setting the identity of the author.
     // identity is optional.
     {
-        author.setIdentity(IdentityUtil.email("michael@smyers.net"));
-        author.setIdentity(IdentityUtil.username("michaelsmyers"));
+        author.setIdentity(IdentityUtil.email("michael@johnson.net"));
+        author.setIdentity(IdentityUtil.username("michaeljohnson"));
         // autodetect email
-        author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net"));
+        author.setIdentity(IdentityUtil.toIdentity("michael@johnson.net"));
         // autodetect username
-        author.setIdentity(IdentityUtil.toIdentity("michaelsmyers"));
+        author.setIdentity(IdentityUtil.toIdentity("michaeljohnson"));
     }
 
     // all fields optional
@@ -120,13 +120,13 @@ final Author author = new Author();
         // you could do it the boring way...
         {
             author.setFirstName("Michael");
-            author.setLastName("Smyers");
+            author.setLastName("Johnson");
             author.setDisplayName("The best guy around");
         }
 
         // or you could use fancy tools
-        // the name parser handles a bunch of cool stuff like 'Michael Smyers Jr. III'
-        Named named = NameUtil.parse("Michael Smyers");
+        // the name parser handles a bunch of cool stuff like 'Michael Johnson Jr. III'
+        Named named = NameUtil.parse("Michael Johnson");
         String location = "Seattle";
 
         {
