@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;

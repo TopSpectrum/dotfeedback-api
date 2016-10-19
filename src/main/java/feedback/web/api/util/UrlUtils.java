@@ -1,7 +1,8 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.google.common.net.InternetDomainName;
 import com.zipwhip.util.StringUtil;
+import feedback.web.api.model.Website;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;

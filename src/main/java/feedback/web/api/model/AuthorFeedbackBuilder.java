@@ -1,9 +1,12 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.zipwhip.concurrent.ObservableFuture;
+import feedback.web.api.util.MorePreconditions;
 import feedback.web.api.names.Name;
-import feedback.web.api.names.NameUtil;
+import feedback.web.api.util.NameUtil;
 import feedback.web.api.names.Named;
+import feedback.web.api.util.ConversionUtils;
+import feedback.web.api.util.IdentityUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

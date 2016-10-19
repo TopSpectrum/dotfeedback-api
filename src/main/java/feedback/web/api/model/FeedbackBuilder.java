@@ -1,6 +1,10 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.zipwhip.concurrent.ObservableFuture;
+import feedback.web.api.FeedbackClient;
+import feedback.web.api.FeedbackClientBuilder;
+import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.util.UrlUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

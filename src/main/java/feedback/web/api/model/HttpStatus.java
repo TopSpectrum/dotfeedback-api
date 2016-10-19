@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 /**
  * Enumeration of HTTP status codes.

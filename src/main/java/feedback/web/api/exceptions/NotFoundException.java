@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.exceptions;
 
 import javax.annotation.Nullable;
 

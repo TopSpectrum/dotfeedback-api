@@ -3,6 +3,12 @@ package feedback.web.api;
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import feedback.web.api.executors.DefaultExecutorFactory;
+import feedback.web.api.executors.ExecutorFactory;
+import feedback.web.api.model.Website;
+import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.util.ConversionUtils;
+import feedback.web.api.util.UrlUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import javax.annotation.Nonnull;
@@ -31,9 +37,6 @@ public class FeedbackClientConfiguration {
     private Gson gson = new GsonBuilder()
             .create();
 
-    @Nonnull
-    private Charset charset = Charset.forName("UTF-8");
-
     @Nullable
     private Website defaultWebsite;
 
@@ -44,7 +47,6 @@ public class FeedbackClientConfiguration {
     public FeedbackClientConfiguration(@Nonnull final FeedbackClientConfiguration configuration) {
         this.setDefaultWebsite(configuration.getDefaultWebsite());
         this.setExecutorFactory(configuration.getExecutorFactory());
-        this.setCharset(configuration.getCharset());
         this.setGson(configuration.getGson());
         this.setAuthorizer(configuration.getAuthorizer());
         this.setDefaultWebsite(configuration.getDefaultWebsite());
@@ -94,15 +96,6 @@ public class FeedbackClientConfiguration {
 
     public void setGson(@Nonnull Gson gson) {
         this.gson = MorePreconditions.checkNotNull(gson);
-    }
-
-    @Nonnull
-    public Charset getCharset() {
-        return charset;
-    }
-
-    public void setCharset(@Nonnull Charset charset) {
-        this.charset = MorePreconditions.checkNotNull(charset, "charset");
     }
 
     public void setDefaultWebsite(@Nullable Website defaultWebsite) {

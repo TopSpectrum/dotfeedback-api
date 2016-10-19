@@ -1,5 +1,9 @@
 package feedback.web.api;
 
+import feedback.web.api.model.Website;
+import feedback.web.api.util.MorePreconditions;
+import feedback.web.api.util.UrlUtils;
+
 import javax.annotation.Nonnull;
 import java.net.URI;
 import java.net.URL;
@@ -23,10 +27,6 @@ public class FeedbackUrlFactory implements UrlFactory {
         this.versionUri = MorePreconditions.checkNotBlank(versionUri);
     }
 
-    public FeedbackUrlFactory(@Nonnull final Website fullDomainNameWithSlug) {
-        this(fullDomainNameWithSlug, VERSION_1);
-    }
-
     @Nonnull
     @Override
     public URL create() {
@@ -35,23 +35,8 @@ public class FeedbackUrlFactory implements UrlFactory {
 
     @Nonnull
     @Override
-    public URL withRelative(@Nonnull String relativeUri) {
-        return UrlUtils.getUrl(create(), relativeUri);
-    }
-
-    @Nonnull
-    @Override
     public URL withRelative(@Nonnull URI relativeUri) {
         return UrlUtils.getUrl(create(), relativeUri);
     }
 
-    @Nonnull
-    public Website getFullDomainNameWithSlug() {
-        return fullDomainNameWithSlug;
-    }
-
-    @Nonnull
-    public URI getVersionUri() {
-        return versionUri;
-    }
 }

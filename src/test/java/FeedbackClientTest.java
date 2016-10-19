@@ -1,15 +1,21 @@
 import com.google.gson.GsonBuilder;
 import com.ning.http.client.AsyncHttpClient;
 import com.zipwhip.concurrent.ObservableFuture;
-import feedback.web.api.*;
-import feedback.web.api.names.NameUtil;
+import feedback.web.api.ApiKeyAuthorizer;
+import feedback.web.api.DefaultFeedbackClient;
+import feedback.web.api.FeedbackClient;
+import feedback.web.api.FeedbackClientConfiguration;
+import feedback.web.api.executors.DefaultExecutorFactory;
+import feedback.web.api.model.*;
 import feedback.web.api.names.Named;
+import feedback.web.api.util.IdentityUtil;
+import feedback.web.api.util.NameUtil;
+import feedback.web.api.util.UrlUtils;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -138,8 +144,6 @@ public class FeedbackClientTest {
             // Set your ApiKey here.
             configuration.setAuthorizer(new ApiKeyAuthorizer("074ee555-56d4-4051-a814-707f0736c086"));
 
-            configuration.setCharset(Charset.forName("UTF-8")); // default value.
-
             int threadsPerWorker = 10; // default value.
             int threadsPerEvents = 1; // default value.
             configuration.setExecutorFactory(new DefaultExecutorFactory(threadsPerWorker, threadsPerEvents)); //default value.
@@ -187,7 +191,6 @@ public class FeedbackClientTest {
         ReviewResponse response = future.get(30, TimeUnit.SECONDS);
 
         URL postedTo = response.getReviewUrl();
-
     }
 
     @Test

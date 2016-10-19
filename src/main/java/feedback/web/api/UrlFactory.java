@@ -14,9 +14,6 @@ public interface UrlFactory {
     URL create();
 
     @Nonnull
-    URL withRelative(@Nonnull final String relativeUri);
-
-    @Nonnull
     URL withRelative(@Nonnull final URI relativeUri);
 
 }

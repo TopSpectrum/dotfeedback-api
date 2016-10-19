@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;

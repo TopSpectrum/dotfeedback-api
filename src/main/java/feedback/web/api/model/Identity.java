@@ -1,6 +1,7 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.google.common.base.Objects;
+import feedback.web.api.util.MorePreconditions;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

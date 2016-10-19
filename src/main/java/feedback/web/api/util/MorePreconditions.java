@@ -1,6 +1,8 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.google.common.base.Preconditions;
+import feedback.web.api.model.Identity;
+import feedback.web.api.model.Website;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;

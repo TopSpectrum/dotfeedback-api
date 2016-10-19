@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;

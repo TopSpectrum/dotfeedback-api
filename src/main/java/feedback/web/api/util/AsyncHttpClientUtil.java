@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.google.common.base.Preconditions;
 import com.google.gson.Gson;
@@ -7,6 +7,8 @@ import com.zipwhip.concurrent.DefaultObservableFuture;
 import com.zipwhip.concurrent.FakeFailingObservableFuture;
 import com.zipwhip.concurrent.MutableObservableFuture;
 import com.zipwhip.concurrent.ObservableFuture;
+import feedback.web.api.exceptions.HttpRequestException;
+import feedback.web.api.model.HttpStatus;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 

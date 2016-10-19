@@ -1,8 +1,9 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import feedback.web.api.names.NameUtil;
+import feedback.web.api.util.ConversionUtils;
+import feedback.web.api.util.NameUtil;
 import feedback.web.api.names.Named;
 
 import javax.annotation.Nullable;

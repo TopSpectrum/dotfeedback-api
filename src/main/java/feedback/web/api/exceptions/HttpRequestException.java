@@ -1,6 +1,7 @@
-package feedback.web.api;
+package feedback.web.api.exceptions;
 
 import com.google.common.base.MoreObjects;
+import feedback.web.api.model.HttpStatus;
 
 /**
  * @author msmyers

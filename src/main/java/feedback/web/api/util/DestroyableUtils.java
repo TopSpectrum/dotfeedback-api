@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.zipwhip.lifecycle.CascadingDestroyable;
 import com.zipwhip.lifecycle.Destroyable;

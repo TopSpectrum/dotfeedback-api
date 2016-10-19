@@ -1,6 +1,9 @@
-package feedback.web.api.names;
+package feedback.web.api.util;
 
-import feedback.web.api.ConversionUtils;
+import feedback.web.api.names.HumanNameParser;
+import feedback.web.api.names.InlineNamed;
+import feedback.web.api.names.Name;
+import feedback.web.api.names.Named;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;

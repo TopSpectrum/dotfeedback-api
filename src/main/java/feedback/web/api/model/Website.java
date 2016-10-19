@@ -1,6 +1,7 @@
-package feedback.web.api;
+package feedback.web.api.model;
 
 import com.google.common.base.Objects;
+import feedback.web.api.util.UrlUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
@@ -69,11 +70,7 @@ public class Website implements Serializable {
         if (StringUtils.isNoneBlank(customerDomainName, topLevelDomainName, fullDomainName, fullDomainNameWithSlug)) {
             valid = true;
 
-            if (StringUtils.equalsIgnoreCase(fullDomainNameWithSlug, originalDomainName)) {
-                perfect_valid = true;
-            } else {
-                perfect_valid = false;
-            }
+            perfect_valid = StringUtils.equalsIgnoreCase(fullDomainNameWithSlug, originalDomainName);
         } else {
             valid = false;
             perfect_valid = false;

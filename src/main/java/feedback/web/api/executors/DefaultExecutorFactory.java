@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.executors;
 
 import com.google.common.base.Preconditions;
 import com.zipwhip.executors.NamedThreadFactory;

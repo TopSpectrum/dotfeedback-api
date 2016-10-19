@@ -1,6 +1,7 @@
-package feedback.web.api;
+package feedback.web.api.util;
 
 import com.google.common.base.Splitter;
+import feedback.web.api.model.Identity;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;

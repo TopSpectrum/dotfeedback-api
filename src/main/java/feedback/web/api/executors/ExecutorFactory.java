@@ -1,4 +1,4 @@
-package feedback.web.api;
+package feedback.web.api.executors;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

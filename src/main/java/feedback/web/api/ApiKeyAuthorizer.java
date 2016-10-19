@@ -1,6 +1,7 @@
 package feedback.web.api;
 
 import com.ning.http.client.AsyncHttpClient;
+import feedback.web.api.util.MorePreconditions;
 
 import javax.annotation.Nonnull;
 
