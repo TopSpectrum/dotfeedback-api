@@ -41,12 +41,21 @@ public class FeedbackClientTest {
             // examples on setting the identity of the author.
             // identity is optional.
             {
+                // helpers
                 author.setIdentity(IdentityUtil.email("michael@smyers.net"));
                 author.setIdentity(IdentityUtil.username("michaelsmyers"));
-                // autodetect email
-                author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net"));
-                // autodetect username
-                author.setIdentity(IdentityUtil.toIdentity("michaelsmyers"));
+
+                // autodetects
+                author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net")); // ( email )
+                author.setIdentity(IdentityUtil.toIdentity("michaelsmyers")); // ( username )
+
+                // uri
+                author.setIdentity(IdentityUtil.toIdentity("email:/michaelsmyers"));
+                author.setIdentity(IdentityUtil.toIdentity("username:/michaelsmyers"));
+                author.setIdentity(IdentityUtil.toIdentity("facebook:/michael.smyers"));
+
+                // DO.IT.LIVE.
+                author.setIdentity(new Identity("email", "michael@smyers.net"));
             }
 
             // all fields optional
