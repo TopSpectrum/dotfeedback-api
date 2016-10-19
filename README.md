@@ -82,6 +82,9 @@ final Review review = new Review();
 
     // optional (10 -> 5 stars)
     review.setRating(10);
+    
+    // optional IF AND ONLY IF the configuration provides a default website
+    review.setFullDomainNameWithSlug("michael.feedback");
 }
 
 final ObservableFuture<ReviewResponse> future = client.createReview(review);
@@ -91,4 +94,79 @@ final ReviewResponse response = future.get();
 System.out.println("Feedback posted to " + response.getReviewUrl());
 ```
 
+#### Import feedback 
 
+```java
+final Author author = new Author();
+
+{
+    // examples on setting the identity of the author.
+    // identity is optional.
+    {
+        author.setIdentity(IdentityUtil.email("michael@smyers.net"));
+        author.setIdentity(IdentityUtil.username("michaelsmyers"));
+        // autodetect email
+        author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net"));
+        // autodetect username
+        author.setIdentity(IdentityUtil.toIdentity("michaelsmyers"));
+    }
+
+    // all fields optional
+    author.setImageUrl(UrlUtils.getUrl("...some image..."));
+    author.setProfileUrl(UrlUtils.getUrl("...some url..."));
+
+    // displayName, firstName, lastName, location
+    {
+        // you could do it the boring way...
+        {
+            author.setFirstName("Michael");
+            author.setLastName("Smyers");
+            author.setDisplayName("The best guy around");
+        }
+
+        // or you could use fancy tools
+        // the name parser handles a bunch of cool stuff like 'Michael Smyers Jr. III'
+        Named named = NameUtil.parse("Michael Smyers");
+        String location = "Seattle";
+
+        {
+            author.setNamed(named);
+
+            // setNamed(@Nullable named) internally calls:
+            author.setFirstName(named.getFirstName());
+            author.setLastName(named.getFirstName());
+            author.setDisplayName(named.getDisplayName());
+        }
+
+        {
+            // even better, use the location
+            author.setNamed(named, location);
+
+            // setNamed(@Nullable named, @Nullable location) internally calls:
+            author.setNamed(named);
+            author.setLocation(location);
+            author.setDisplayName(NameUtil.getFirstNameLastInitialWithLocation(named, location));
+        }
+    }
+}
+
+final Review review = new Review();
+
+{
+    review.setImportedSource(UrlUtils.getUrl("http://www.MyConsumerSite.com/review/33"));
+
+    review.setAuthor(author);
+
+    // default value
+    review.setCreatedDate(Instant.now());
+
+    review.setContent("I like pickles.");
+
+    // optional (10 -> 5 stars)
+    review.setRating(10);
+
+    // optional IF AND ONLY IF the configuration provides a default website
+    review.setFullDomainNameWithSlug("michael.feedback");
+}
+
+```

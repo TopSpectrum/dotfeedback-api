@@ -2,6 +2,8 @@ package feedback.web.api;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
+import feedback.web.api.names.NameUtil;
+import feedback.web.api.names.Named;
 
 import javax.annotation.Nullable;
 import java.io.Serializable;
@@ -150,5 +152,16 @@ public class Author implements Serializable {
                 .add("lastName", lastName)
                 .add("firstName", firstName)
                 .toString();
+    }
+
+    public void setNamed(@Nullable final Named named, @Nullable final String location) {
+        setNamed(named);
+        setLocation(location);
+        setDisplayName(NameUtil.getFirstNameLastInitialWithLocation(named, location));
+    }
+    public void setNamed(@Nullable final Named named) {
+        this.setDisplayName(ConversionUtils.optValue(named, Named::getDisplayName));
+        this.setFirstName(ConversionUtils.optValue(named, Named::getFirstName));
+        this.setLastName(ConversionUtils.optValue(named, Named::getLastName));
     }
 }

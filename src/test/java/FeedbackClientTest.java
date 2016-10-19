@@ -2,12 +2,15 @@ import com.google.gson.GsonBuilder;
 import com.ning.http.client.AsyncHttpClient;
 import com.zipwhip.concurrent.ObservableFuture;
 import feedback.web.api.*;
+import feedback.web.api.names.NameUtil;
+import feedback.web.api.names.Named;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.time.Instant;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -31,8 +34,86 @@ public class FeedbackClientTest {
     }
 
     @Test
-    public void nameSetupClient() throws Exception {
+    public void setupClient__author() throws Exception {
+        final Author author = new Author();
 
+        {
+            // examples on setting the identity of the author.
+            // identity is optional.
+            {
+                author.setIdentity(IdentityUtil.email("michael@smyers.net"));
+                author.setIdentity(IdentityUtil.username("michaelsmyers"));
+                // autodetect email
+                author.setIdentity(IdentityUtil.toIdentity("michael@smyers.net"));
+                // autodetect username
+                author.setIdentity(IdentityUtil.toIdentity("michaelsmyers"));
+            }
+
+            // all fields optional
+            author.setImageUrl(UrlUtils.getUrl("...some image..."));
+            author.setProfileUrl(UrlUtils.getUrl("...some url..."));
+
+            // displayName, firstName, lastName, location
+            {
+                // you could do it the boring way...
+                {
+                    author.setFirstName("Michael");
+                    author.setLastName("Smyers");
+                    author.setDisplayName("The best guy around");
+                }
+
+                // or you could use fancy tools
+                // the name parser handles a bunch of cool stuff like 'Michael Smyers Jr. III'
+                Named named = NameUtil.parse("Michael Smyers");
+                String location = "Seattle";
+
+                {
+                    author.setNamed(named);
+
+                    // setNamed(@Nullable named) internally calls:
+                    author.setFirstName(named.getFirstName());
+                    author.setLastName(named.getFirstName());
+                    author.setDisplayName(named.getDisplayName());
+                }
+
+                {
+                    // even better, use the location
+                    author.setNamed(named, location);
+
+                    // setNamed(@Nullable named, @Nullable location) internally calls:
+                    author.setNamed(named);
+                    author.setLocation(location);
+                    author.setDisplayName(NameUtil.getFirstNameLastInitialWithLocation(named, location));
+                }
+            }
+        }
+
+        final Review review = new Review();
+
+        {
+            review.setImportedSource(UrlUtils.getUrl("http://www.MyConsumerSite.com/review/33"));
+
+            review.setAuthor(author);
+
+            // default value
+            review.setCreatedDate(Instant.now());
+
+            review.setContent("I like pickles.");
+
+            // optional (10 -> 5 stars)
+            review.setRating(10);
+
+            // optional IF AND ONLY IF the configuration provides a default website
+            review.setFullDomainNameWithSlug("michael.feedback");
+        }
+
+//        final ObservableFuture<ReviewResponse> future = client.createReview(review);
+//
+//        final ReviewResponse response = future.get();
+    }
+
+    @Test
+    public void nameSetupClient() throws Exception {
         final FeedbackClient client;
 
         {
@@ -67,12 +148,14 @@ public class FeedbackClientTest {
 
             // optional (10 -> 5 stars)
             review.setRating(10);
+
+            // optional IF AND ONLY IF the configuration provides a default website
+            review.setFullDomainNameWithSlug("michael.feedback");
         }
 
         final ObservableFuture<ReviewResponse> future = client.createReview(review);
 
         final ReviewResponse response = future.get();
-
     }
 
     @Test
