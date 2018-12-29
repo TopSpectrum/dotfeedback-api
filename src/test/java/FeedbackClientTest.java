@@ -205,21 +205,21 @@ public class FeedbackClientTest {
         }
 
         final ReviewResponse review = new FeedbackBuilder()
-                .withApiKey("074ee555-56d4-4051-a814-707f0736c086")
+                .withApiKey("074ee555-56d4-4051-a815-707f0736c086")
                 .forWebsite("default.feedback")
                 .sendFeedback(author, "I really enjoyed the eggs")
                 .get(30, TimeUnit.SECONDS);
 
-        ReviewResponse review2 = new FeedbackBuilder()
-                .importedFrom(UrlUtils.getUrl("http://www.MyConsumerSite.com/review/322"))
-                .rated(10)
-                .withContent("I like tomatoes better than pickles.")
-                .writtenBy("Michael Smyers")
-                .identifiedBy("michael@smyers.net")
-                .havingProfile(UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666"), UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666/picture.png"))
-                .locatedIn("Seattle")
-                .send()
-                .get();
+//        ReviewResponse review2 = new FeedbackBuilder()
+//                .importedFrom(UrlUtils.getUrl("http://www.MyConsumerSite.com/review/322"))
+//                .rated(10)
+//                .withContent("I like tomatoes better than pickles.")
+//                .writtenBy("Michael Smyers")
+//                .identifiedBy("michael@smyers.net")
+//                .havingProfile(UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666"), UrlUtils.getUrl("http://www.MyConsumerSite.com/user/666/picture.png"))
+//                .locatedIn("Seattle")
+//                .send()
+//                .get();
 
         LOGGER.debug("Our feedback is available at {}", review.getReviewUrl());
 

@@ -211,36 +211,36 @@
                 </executions>
             </plugin>
 
-            <plugin>
-                <groupId>br.com.kibutx</groupId>
-                <artifactId>slack-maven-plugin</artifactId>
-                <version>1.1.0-SNAPSHOT</version>
+            <!--<plugin>-->
+                <!--<groupId>br.com.kibutx</groupId>-->
+                <!--<artifactId>slack-maven-plugin</artifactId>-->
+                <!--<version>1.1.0-SNAPSHOT</version>-->
 
-                <executions>
-                    <execution>
-                        <id>MSG inicio deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>slackmessage</goal>
-                        </goals>
-                        <configuration>
-                            <apiHash>/T063PFYBX/B0HUZTNDV/RtSdR9yNqUnoA1JMMRX7fxnW</apiHash>
-                            <username>${project.artifactId} ${project.version}</username>
-                            <channel>#dev-events</channel>
-                            <message>Documentation:</message>
-                            <attachments>
-                                <attachment>
-                                    <text>For more information, please look at the documentation:</text>
-                                </attachment>
-                                <attachment>
-                                    <title>http://docs.corp.topspectrum.com/${profile.id}/${project.artifactId}/${project.version}/javadocs/index.html</title>
-                                    <title_link>http://docs.corp.topspectrum.com/${profile.id}/${project.artifactId}/${project.version}/javadocs/index.html</title_link>
-                                </attachment>
-                            </attachments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>MSG inicio deploy</id>-->
+                        <!--<phase>deploy</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>slackmessage</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<apiHash>/T063PFYBX/B0HUZTNDV/RtSdR9yNqUnoA1JMMRX7fxnW</apiHash>-->
+                            <!--<username>${project.artifactId} ${project.version}</username>-->
+                            <!--<channel>#dev-events</channel>-->
+                            <!--<message>Documentation:</message>-->
+                            <!--<attachments>-->
+                                <!--<attachment>-->
+                                    <!--<text>For more information, please look at the documentation:</text>-->
+                                <!--</attachment>-->
+                                <!--<attachment>-->
+                                    <!--<title>http://docs.corp.topspectrum.com/${profile.id}/${project.artifactId}/${project.version}/javadocs/index.html</title>-->
+                                    <!--<title_link>http://docs.corp.topspectrum.com/${profile.id}/${project.artifactId}/${project.version}/javadocs/index.html</title_link>-->
+                                <!--</attachment>-->
+                            <!--</attachments>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
 
             <plugin>
                 <groupId>external.atlassian.jgitflow</groupId>
