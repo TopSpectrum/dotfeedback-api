@@ -15,6 +15,7 @@ import java.util.concurrent.ThreadFactory;
  * @author msmyers
  * @since 8/11/16
  */
+@SuppressWarnings("ALL")
 public class DefaultExecutorFactory implements ExecutorFactory {
 
     private static final DefaultExecutorFactory INSTANCE = new DefaultExecutorFactory();
