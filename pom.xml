@@ -51,7 +51,7 @@
 
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
         <jee.version>7.0</jee.version>
-        <jetty.version>9.0.5.v20130815</jetty.version>
+        <jetty.version>9.4.41.v20210516</jetty.version>
         <!--Build timestamp injected into version.properties. See: http://jira.codehaus.org/browse/MRESOURCES-99 -->
         <timestamp>${maven.build.timestamp}</timestamp>
 
